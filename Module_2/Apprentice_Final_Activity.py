@@ -2,13 +2,14 @@ import operator as op
 
 saved_string = ''
 
-def remove_letter(letter, string): #Remove a selected letter from a string
-    iterations = op.countOf(string, letter)
-    result = string
-    while iterations > 0:
-        iterations -= 1
-        result = op.delitem(letter,op.indexOf(result, letter))
-    return string
+def remove_letter(): #Remove a selected letter from a string
+    result = ''
+    string = str(input("Enter the string: "))
+    letter = str(input("Enter the letter: "))
+    for char in string:
+        result += char if char != letter else ''
+    print("The result is: " + result)
+    return result
 
 def num_compare(): #Compare 2 numbers to determine the larger
     num1 = int(input("Number 1: "))
@@ -21,25 +22,26 @@ def print_string(): #Print the previously stored string
     return
 
 def calculator(): #Basic Calculator (addition, subtraction, multiplication, division)
+    operation_list = [op.add, op.sub, op.mul, op.truediv]
+    operation = calculator_menu()
+    num1 = int(input("Number 1: "))
+    num2 = int(input("Number 2: "))
+    result = operation_list[operation](num1,num2)
+    print("The result is: %d" % result)
+    return result
+
+def calculator_menu():
     print("Operations:")
     print("1. Addition")
     print("2. Subtraction")
     print("3. Multiplication")
     print("4. Division")
-    operation = str(input("Operation: "))
-    if int(operation) > 0 and int(operation) < 5:
-        num1 = int(input("Number 1: "))
-        num2 = int(input("Number 2: "))
-        if operation == '1':
-            result = op.add(num1,num2)
-        elif operation == '2':
-            result = op.sub(num1,num2)
-        elif operation == '3':
-            result = op.mul(num1,num2)
-        elif operation == '4':
-            result = op.truediv(num1,num2)
-        print("The result is: %d" % result)
-    else: print("Please, enter a correct value.")
+    operation = int(input("Operation: ")) - 1
+    if 0 <= int(operation) < 4:
+        return operation
+    else:
+        print("Please, enter a correct value.")
+        exit()
 
 def accept_and_store(): #Accept and store a string
     global saved_string
