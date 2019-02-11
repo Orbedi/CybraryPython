@@ -18,6 +18,11 @@ item:
 
 '''
 def journeyman1(str_list , item):
+    filename = str(str_list[item])
+    file = open(filename,"w+")
+    for index,content in enumerate(str_list):
+        if index != item: file.write(content)
+    file.close()
     return
 
 
@@ -26,11 +31,11 @@ returns the sum of every integer up to and including that number, use a
 generator.'''
 
 def sum_generator(final_num):
-    return #(Make this a yield)
+    for n in range(final_num+1):
+        yield (n)
 
 def journeyman2(final_num):
-    #return sum(range(final_num+1))
-    return
+    return sum(sum_generator(final_num))
 
 
 '''1.3) Write a python script which connects to the included server 
@@ -45,4 +50,7 @@ def journeyman4():
     return
     
 
+def main():
+    print(journeyman2(3))
 
+main()
